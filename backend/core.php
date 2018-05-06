@@ -2,20 +2,14 @@
 
 include 'config.php';
 
-function insert_update_customer($name, $company, $mail, $id, $accept)
+function insert_update_customer($mail, $id, $accept)
 {
 	$time = time();
-	$sql = <<<EOT
-INSERT INTO customers (name, company, mail, answer, api_hash, last_change_timestamp)
-VALUES($name, $company, $mail, $accept, $id, $time)
-ON DUPLICATE KEY UPDATE name="$name", company="$company", mail="$mail", answer=$accept, api_hash="$id", last_change_timestamp=$time
-EOT;
 
-echo "$sql";
+	$sql = <<<EOL
+INSERT INTO customers (mail, answer, api_hash, last_change_timestamp) VALUES("$mail", $accept, "$id", $time) ON DUPLICATE KEY UPDATE answer=$accept, last_change_timestamp=$time;
+EOL;
 
-// check wheter with semicolon at the end or not!
-
-//	return insert_query($name, $company, $mail, $id, $accept, time());
 	return insert_query($sql);
 }
 
@@ -38,6 +32,11 @@ function check_if_mail_is_valid($m0, $m1)
 // returns resutl to loop over...
 function query_db($sql)
 {
+	global $servername;
+	global $username;
+	global $password;
+	global $dbname;
+
 	$conn = new mysqli($servername, $username, $password, $dbname);
 
 	if ($conn->connect_error) {
@@ -61,7 +60,13 @@ function query_db($sql)
 // returns boolean  about query success
 function insert_query($query)
 {
-	$conn = new mysqli($servername, 'd02a5269', 'LqaR3NcPSFyGAVXx', 'd02a5269');
+	global $servername;
+	global $username;
+	global $password;
+	global $dbname;
+
+//	$conn = new mysqli($servername, 'd02a5269', 'LqaR3NcPSFyGAVXx', 'd02a5269');
+	$conn = new mysqli($servername, $username, $password, $dbname);
 
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);

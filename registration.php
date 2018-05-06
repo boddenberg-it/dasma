@@ -1,30 +1,26 @@
-<p>YEAH WAS GETH STEILT!!!!</p>
-
+<p>Thanks for your reply!</p>
+<br>
+<br>
+<p>
 <?php
 	include 'backend/salt.php';
 	include 'backend/core.php';
 
-        // get vars
-        $name = $_GET['name'];
-        $company = $_GET['company'];
         $mail = $_GET['mail'];
         $id = $_GET['id'];
 	$accept = $_GET['accept'];
 
-	echo "Hallo Welt! was geht steil alter!!!";
-
-//	echo 'Hallo ' . htmlspecialchars($_GET["name"]) . '!';
-
-	echo "$name   $company   $mail   $id    $accept";
-
 	if ((strcmp($id, generate_hash($mail)) !== 0))
 	{
-		echo "ERROR: somebody is tampering here... ò.Ó";
+		echo "ERROR: somebody is tampering with the hash...";
 		return;
 	}
 
-	echo "id is correct";
-
-	echo insert_update_customer($name, $company, $mail, $id, $accept);
+	if (insert_update_customer($mail, $id, $accept) == 1)
+	{
+		echo "Your answer has been saved! We will take actions accordingly.";
+	} else {
+		echo "Something went wrong. Please contact it-support@membrapure.de by sending your registration links";
+	}
 ?>
-
+</p>
