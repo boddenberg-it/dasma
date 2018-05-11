@@ -14,29 +14,15 @@ $from = "datenschutz@boddenberg.it";
 $reply_to = "info@boddenberg.it";
 
 $betreff_registration = "Registration confirmed, please continue the process";
-$betreff_acceptance = "ullu";
-$betreff_reminder = "ullu";
 
-$msg_hash_invalid = <<<EOT
-
-ERROR: somebody is tampering with the hash...
-EOT;
-
-// messages for registration mail has been sent page //
+// messages for register.php
 //
 // top text shown for succes and failure (mail address)
+// use $mail0 to use mail address
 $mail_send_header = <<<EOT
 Vielen Dank $mail0.
 
 Thanks $mail0.
-EOT;
-
-$msg_answer_saved_successfully = <<<EOT
-Your answer has been saved! We will take actions accordingly.
-EOT;
-
-$msg_answer_saved_failed = <<<EOT
-Something went wrong. Please contact it-support@membrapure.de by sending your registration links";
 EOT;
 
 // mail was valid
@@ -53,7 +39,11 @@ Fehler: E-Mail ist ung&uuml;ltig! Bitter versuchen Sie es erneut.
 Error: mail is not valid! Please go back and retype your mail address.
 EOT;
 
-// messages for answer links evaluation page
+
+// messages for answer registration.php (link evaluation page)
+$msg_hash_invalid = <<<EOT
+ERROR: somebody is tampering with the hash...
+EOT;
 
 $msg_registration_header = <<<EOT
 <h2>Vielen Dank f&uuml;r Ihre aktualisierte Einwilligung</h2>
@@ -69,6 +59,14 @@ EOT;
 
 $msg_answer_saved_failed = <<<EOT
 Wir werden Ihre Kontaktdaten aus unserem System entfernen. Sie können sich jederzeit <a href="https://datenschutz.membrapure.de/>erneut registrieren</a>.
+EOT;
+
+$msg_registration_true = <<<EOT
+
+EOT;
+
+$msg_registration_false = <<<EOT
+
 EOT;
 
 $msg_registration_footer = <<<EOT
@@ -91,6 +89,7 @@ Best Regards
 membraPure GmbH
 </p>
 EOT;
+
 
 // registration email text
 $msg_registration = <<<EOT
@@ -143,6 +142,4 @@ $URL$link_registration_no
 Best Regards,
    boddenberg.it
 EOT;
-
-
 ?>
