@@ -12,16 +12,17 @@
 		return;
 	}
 
+	echo "$msg_registration_header";
+
 	if (insert_update_customer($mail, $id, $accept) == 1)
 	{
 		echo "$msg_answer_saved_successfully";
-		} else {
+	} else {
 		echo "$msg_answer_saved_failed";
+		return;
 	}
 
-	echo "$msg_registration_header";
-
-	if ($_GET['accept'] == "true")
+	if ($accept == "true")
 	{
 		echo "$msg_registration_true";
 	} else {
