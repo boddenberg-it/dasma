@@ -1,15 +1,6 @@
-
-
-<p>Thanks <?php echo $_POST['mail0']; ?> !</p>
-<br>
-<br>
-<p>
 <?php
-	// get vars
-	$name = str_replace(' ', '+', htmlspecialchars($_POST['name']));
-	$company = $_POST['company'];
-	$mail0 = $_POST['mail0'];
-	$mail1 = $_POST['mail1'];
+	$mail0 = htmlspecialchars($_POST['mail0']);
+	$mail1 = htmlspecialchars($_POST['mail1']);
 
 	include 'backend/salt.php';
 	$id_hash = generate_hash($mail0);
@@ -20,14 +11,13 @@
 	// important to include after getting vars, cuz these are expanded within core.php
 	include 'backend/core.php';
 
-	// is mail valid?
+	echo "$mail_send_header";
+
 	if (check_if_mail_is_valid($mail0, $mail1))
 	{
-		// send registration mail
 		send_mail($from, $reply_to, $mail0, $betreff_registration, $msg_registration);
-		echo "Successfully registered. You will receive a mail with further instructions soon.";
+		echo "$mail_send_successfully";
 	} else {
-		echo "ERROR: mail is not valid! Please go back and retype your mail address.";
+		echo "$mail_send_failed";
 	}
 ?>
-</p>
